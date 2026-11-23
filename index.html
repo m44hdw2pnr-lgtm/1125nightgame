@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0d4aa6" />
+  <title>안전 타이밍 챌린지</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand-wrap">
+        <img src="./assets/ls-logo.png" alt="LS전선" class="brand-logo" />
+        <div>
+          <p class="eyebrow">SHE EVENT MINI GAME</p>
+          <h1>안전 타이밍 챌린지</h1>
+        </div>
+      </div>
+      <span class="pill">5라운드 · 합산 랭킹</span>
+    </header>
+
+    <section class="card screen" id="screenIntro">
+      <div class="intro-grid">
+        <div>
+          <p class="intro-lead">위험이 다가옵니다. <br>중앙 <strong>안전 위치</strong>에서 정확히 멈춰주세요!</p>
+          <ul class="feature-list">
+            <li>총 <strong>5번의 기회</strong></li>
+            <li>각 라운드 점수 <strong>합산</strong></li>
+            <li>닉네임 기반 <strong>전체 TOP 10 랭킹</strong></li>
+          </ul>
+          <label for="nickname" class="field-label">랭킹에 표시할 닉네임</label>
+          <input id="nickname" class="nickname-input" autocomplete="nickname" maxlength="12" placeholder="예: 안전지킴이" />
+          <p class="hint">실명 대신 별명을 권장합니다. 같은 브라우저에서는 최고 점수만 갱신됩니다.</p>
+          <div class="intro-actions">
+            <button id="startBtn" class="btn btn-primary">게임 시작</button>
+            <button id="showRankBtn" class="btn btn-secondary">랭킹 보기</button>
+          </div>
+          <p class="status-line" id="modeStatus">연결 상태를 확인하는 중...</p>
+        </div>
+        <div class="intro-visual">
+          <img src="./assets/ls-mascot.png" alt="마스코트" class="intro-mascot" />
+          <div class="bubble">터치 타이밍으로<br>모두의 안전을 지켜요!</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card screen hidden" id="screenGame">
+      <div class="game-header">
+        <div>
+          <p class="round-counter" id="roundCounter">ROUND 1 / 5</p>
+          <h2 id="hazardTitle">낙하물 위험</h2>
+          <p class="hazard-desc" id="hazardDesc">안전 위치에서 터치하여 보호구를 착용하세요.</p>
+        </div>
+        <div class="score-boxes">
+          <div class="score-box">
+            <span>현재 합산</span>
+            <strong id="totalScore">0.000</strong>
+          </div>
+          <div class="score-box">
+            <span>최대</span>
+            <strong>500.000</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="warning-banner" id="warningBanner">⚠️ 띠용 띠용! 위험 경고!</div>
+
+      <div class="character-panel">
+        <div class="character-card">
+          <svg viewBox="0 0 260 260" class="hero-svg" aria-label="안전 캐릭터">
+            <defs>
+              <filter id="shadow"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#123b82" flood-opacity="0.2"/></filter>
+            </defs>
+            <g filter="url(#shadow)">
+              <ellipse cx="130" cy="232" rx="62" ry="12" fill="#d7e3f8" />
+              <circle cx="130" cy="98" r="68" fill="#ffffff" stroke="#dce8ff" stroke-width="4"/>
+              <ellipse cx="98" cy="101" rx="8" ry="11" fill="#1c2230"/>
+              <ellipse cx="162" cy="101" rx="8" ry="11" fill="#1c2230"/>
+              <circle cx="88" cy="124" r="18" fill="#f7dce6" opacity="0.7"/>
+              <circle cx="172" cy="124" r="18" fill="#f7dce6" opacity="0.7"/>
+              <path d="M108 137 Q130 155 152 137" fill="none" stroke="#e24d57" stroke-width="6" stroke-linecap="round"/>
+              <path d="M82 57 Q130 28 178 57" fill="none" stroke="#d9e8ff" stroke-width="7" stroke-linecap="round"/>
+              <path d="M130 164 C92 164 74 186 76 220 L184 220 C186 186 168 164 130 164Z" fill="#1650b8"/>
+              <path d="M130 170 L116 186 L130 196 L144 186 Z" fill="#eb3342"/>
+              <text x="130" y="206" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff">LS</text>
+              <path d="M72 176 C48 170 28 180 26 198" fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round"/>
+              <path d="M188 176 C212 170 232 180 234 198" fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round"/>
+              <path d="M88 220 L88 244" stroke="#1650b8" stroke-width="12" stroke-linecap="round"/>
+              <path d="M172 220 L172 244" stroke="#1650b8" stroke-width="12" stroke-linecap="round"/>
+              <g id="equipHelmet" class="equip hidden-equip">
+                <path d="M64 70 Q130 12 196 70 L196 84 L64 84 Z" fill="#f4c533" stroke="#c68b00" stroke-width="4"/>
+                <rect x="102" y="76" width="96" height="14" rx="6" fill="#e49700"/>
+              </g>
+              <g id="equipShoes" class="equip hidden-equip">
+                <path d="M68 240 H106 Q112 240 114 246 L116 252 H68 Z" fill="#344055"/>
+                <path d="M144 240 H182 Q188 240 190 246 L192 252 H144 Z" fill="#344055"/>
+              </g>
+              <g id="equipHarness" class="equip hidden-equip">
+                <path d="M110 164 L100 222" stroke="#ffd84b" stroke-width="8" stroke-linecap="round"/>
+                <path d="M150 164 L160 222" stroke="#ffd84b" stroke-width="8" stroke-linecap="round"/>
+                <path d="M96 186 H164" stroke="#ffd84b" stroke-width="8" stroke-linecap="round"/>
+              </g>
+              <g id="equipGloves" class="equip hidden-equip">
+                <circle cx="30" cy="198" r="10" fill="#f4c533"/>
+                <circle cx="230" cy="198" r="10" fill="#f4c533"/>
+              </g>
+              <g id="equipGlasses" class="equip hidden-equip">
+                <rect x="86" y="88" width="34" height="24" rx="10" fill="none" stroke="#7cc5ff" stroke-width="5"/>
+                <rect x="140" y="88" width="34" height="24" rx="10" fill="none" stroke="#7cc5ff" stroke-width="5"/>
+                <path d="M120 100 H140" stroke="#7cc5ff" stroke-width="5" stroke-linecap="round"/>
+              </g>
+            </g>
+          </svg>
+          <div class="equip-tags" id="equipTags"></div>
+        </div>
+
+        <div class="timing-card" id="timingCard">
+          <div class="target-label">중앙 안전 위치</div>
+          <div class="timing-lane">
+            <div class="center-line"></div>
+            <div class="safe-zone"></div>
+            <div class="bar left-bar" id="leftBar"></div>
+            <div class="bar right-bar" id="rightBar"></div>
+          </div>
+          <div class="lane-caption">양쪽 바가 중앙에서 만나는 순간 <strong>터치!</strong></div>
+          <button id="tapBtn" class="btn btn-tap">지금 터치!</button>
+          <div class="mini-hint">라운드가 진행되는 동안 화면 아무 곳이나 터치해도 됩니다.</div>
+        </div>
+      </div>
+
+      <div class="round-feedback" id="roundFeedback">준비되면 자동으로 시작됩니다.</div>
+      <div class="next-wrap hidden" id="nextWrap">
+        <button id="nextBtn" class="btn btn-primary">다음 라운드</button>
+      </div>
+    </section>
+
+    <section class="card screen hidden" id="screenResult">
+      <p class="eyebrow">MISSION COMPLETE</p>
+      <h2>모든 보호구 착용 완료!</h2>
+      <div class="result-score" id="finalScore">0.000</div>
+      <p class="result-copy" id="resultCopy">모두의 안전을 지켜주셔서 감사합니다</p>
+      <div class="result-actions">
+        <button id="retryBtn" class="btn btn-primary">다시 도전하기</button>
+        <button id="resultRankBtn" class="btn btn-secondary">랭킹 보기</button>
+      </div>
+    </section>
+
+    <section class="card" id="rankSection">
+      <div class="rank-head">
+        <div>
+          <p class="eyebrow">LEADERBOARD</p>
+          <h2>전체 TOP 10</h2>
+        </div>
+        <button id="refreshRankBtn" class="btn btn-small">새로고침</button>
+      </div>
+      <p class="hint" id="rankStatus">랭킹을 불러오는 중입니다.</p>
+      <ol class="rank-list" id="rankList"></ol>
+    </section>
+
+    <footer class="footer-note">배포 후 GitHub Pages 주소를 카카오톡으로 공유하면 여러 명이 동시에 참여하고 같은 랭킹을 볼 수 있습니다.</footer>
+  </main>
+
+  <script src="./firebase-config.js"></script>
+  <script type="module" src="./script.js"></script>
+</body>
+</html>

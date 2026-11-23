@@ -1,0 +1,30 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /scores/{userId} {
+      allow read: if true;
+      allow create, update: if request.auth != null
+        && request.auth.uid == userId
+        && request.resource.data.keys().hasOnly(['nickname', 'score', 'updatedAt', 'roundScores'])
+        && request.resource.data.nickname is string
+        && request.resource.data.nickname.size() >= 1
+        && request.resource.data.nickname.size() <= 12
+        && request.resource.data.score is number
+        && request.resource.data.score >= 0
+        && request.resource.data.score <= 500
+        && request.resource.data.roundScores is list
+        && request.resource.data.roundScores.size() == 5
+        && request.resource.data.roundScores[0] is number
+        && request.resource.data.roundScores[1] is number
+        && request.resource.data.roundScores[2] is number
+        && request.resource.data.roundScores[3] is number
+        && request.resource.data.roundScores[4] is number
+        && request.resource.data.roundScores[0] >= 0 && request.resource.data.roundScores[0] <= 100
+        && request.resource.data.roundScores[1] >= 0 && request.resource.data.roundScores[1] <= 100
+        && request.resource.data.roundScores[2] >= 0 && request.resource.data.roundScores[2] <= 100
+        && request.resource.data.roundScores[3] >= 0 && request.resource.data.roundScores[3] <= 100
+        && request.resource.data.roundScores[4] >= 0 && request.resource.data.roundScores[4] <= 100;
+      allow delete: if false;
+    }
+  }
+}
