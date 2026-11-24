@@ -1,54 +1,50 @@
 <!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0752b8"><title>LS전선 안전 타이밍 챌린지</title><link rel="stylesheet" href="./style.css"></head>
-<body>
-<div id="app">
- <section class="scene intro" id="intro">
-  <div class="top-logo"><span class="lsmark">LS</span><span>전선</span><span class="brand-sep"></span><small>SAFETY CHALLENGE</small></div>
-  <div class="intro-content"><div class="pill">5 ROUNDS · PERFECT TIMING</div><h1>안전을 향해<br><em>정확히 터치!</em></h1><p>양쪽에서 다가오는 두 줄이<br>초록색 안전 구간에 들어올 때 터치하세요.</p>
-  <div class="mini-card"><span>🪖</span><span>👞</span><span>🦺</span><span>🧤</span><span>🥽</span></div>
-  <label for="nickname">참가 닉네임</label><input id="nickname" maxlength="12" autocomplete="nickname" placeholder="예: 안전지킴이"><button id="start" class="bigbtn">게임 시작 <span>→</span></button><p class="network" id="network">연결 상태 확인 중…</p></div>
-  <div class="intro-foot">5번의 점수를 합산해 최고 기록으로 랭킹을 겨뤄요!</div>
- </section>
- <section class="scene playing hide" id="playing">
-  <div class="game-top"><div class="tiny-logo"><span>LS</span>전선</div><div class="round-label" id="roundLabel">ROUND 1 / 5</div><div class="total"><small>TOTAL</small><strong id="total">0.000</strong></div></div>
-  <div class="round-track"><span id="roundDots"></span></div>
-  <div class="danger-msg"><div class="beacon" id="beacon">⚠</div><div><span class="danger-sub">SAFETY ALERT</span><h2 id="hazard">낙하물 위험!</h2><p id="subtitle">안전모를 착용하세요</p></div></div>
-  <div class="character-stage">
-    <div class="character-glow"></div>
-    <svg class="mascot" viewBox="0 0 300 310" role="img" aria-label="LS 마스코트, 보호구가 차례로 장착됩니다">
-      <defs><linearGradient id="skin" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#edf6ff"/></linearGradient><linearGradient id="uniform" x1="0" x2=".8" y1="0" y2="1"><stop stop-color="#1d68df"/><stop offset="1" stop-color="#063987"/></linearGradient><linearGradient id="blush" x1="0" x2="1"><stop stop-color="#ffb9bd" stop-opacity=".85"/><stop offset="1" stop-color="#f5bfd5" stop-opacity=".35"/></linearGradient><filter id="ds"><feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#06316c" flood-opacity=".22"/></filter></defs>
-      <ellipse cx="154" cy="294" rx="74" ry="11" fill="#153879" opacity=".15"/>
-      <g filter="url(#ds)"><path d="M84 226 Q60 229 44 253 Q34 270 51 277 Q69 279 90 250" fill="#ffffff" stroke="#dceafc" stroke-width="5"/><path d="M222 224 Q248 210 261 225 Q277 241 266 259 Q256 270 242 261 Q228 246 214 250" fill="#ffffff" stroke="#dceafc" stroke-width="5"/>
-      <path d="M102 218 L99 273 Q113 287 129 276 L136 240 M178 240 L183 276 Q199 285 216 271 L213 218" stroke="#fff" stroke-width="20" stroke-linecap="round" fill="none"/>
-      <path d="M94 202 Q115 187 151 188 Q197 187 219 203 Q233 229 225 260 Q157 282 82 260 Q75 223 94 202" fill="url(#uniform)" stroke="#fff" stroke-width="5"/>
-      <path d="M145 199 L154 211 L165 198" fill="none" stroke="#fc6371" stroke-width="10" stroke-linecap="round"/><path d="M154 212 L159 239" stroke="#f33b4c" stroke-width="5" stroke-linecap="round"/>
-      <text x="152" y="255" font-family="Arial,sans-serif" fill="#fff" font-style="italic" font-weight="900" font-size="34" text-anchor="middle">LS</text>
-      <path d="M68 141 Q47 156 41 184 Q38 194 50 204" fill="none" stroke="#fff" stroke-width="22" stroke-linecap="round"/>
-      <ellipse cx="153" cy="126" rx="102" ry="100" fill="url(#skin)" stroke="#e3eeff" stroke-width="5"/>
-      <path d="M81 83 Q106 42 151 39 Q206 38 232 83" fill="none" stroke="#eaf3ff" stroke-width="6"/>
-      <ellipse cx="102" cy="160" rx="25" ry="20" fill="url(#blush)"/><ellipse cx="204" cy="160" rx="25" ry="20" fill="url(#blush)"/>
-      <path d="M111 113 Q121 105 133 115 M176 114 Q188 104 198 114" stroke="#313b55" stroke-width="5" fill="none" stroke-linecap="round"/>
-      <ellipse cx="121" cy="134" rx="9" ry="12" fill="#202332"/><ellipse cx="187" cy="134" rx="9" ry="12" fill="#202332"/><circle cx="125" cy="129" r="3" fill="#fff"/><circle cx="190" cy="129" r="3" fill="#fff"/>
-      <path d="M141 157 Q155 172 169 157 Q158 188 141 157" fill="#ea4753"/><path d="M145 160 Q155 168 165 160" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
-      <path d="M231 75 Q245 53 265 65 Q279 80 264 99" fill="#fff" stroke="#e4eeff" stroke-width="5"/>
-      </g>
-      <g id="hat" class="equipment off"><path d="M79 81 Q81 34 151 26 Q225 33 228 83 L217 93 H87Z" fill="#ffcb27" stroke="#de9811" stroke-width="5"/><rect x="72" y="77" width="165" height="17" rx="8" fill="#f5b61f" stroke="#dc9515" stroke-width="3"/><path d="M151 30 V77" stroke="#f9df66" stroke-width="9"/><circle cx="152" cy="55" r="14" fill="#fff"/><path d="M152 46 V64 M143 55 H161" stroke="#39a76f" stroke-width="5"/></g>
-      <g id="shoes" class="equipment off"><path d="M90 273 L133 272 Q145 287 139 297 H78 Q70 284 90 273" fill="#343e57" stroke="#15243f" stroke-width="4"/><path d="M178 272 L218 272 Q233 284 230 297 H165 Q160 286 178 272" fill="#343e57" stroke="#15243f" stroke-width="4"/><path d="M77 294 H139 M166 294 H230" stroke="#f7d85b" stroke-width="5"/></g>
-      <g id="harness" class="equipment off"><path d="M120 198 L102 267 M183 197 L207 264 M99 225 L205 225" fill="none" stroke="#ffce33" stroke-width="12"/><path d="M151 215 L151 267" stroke="#fca62f" stroke-width="6"/><rect x="139" y="215" width="25" height="22" rx="4" fill="#dedfee" stroke="#9b9db1" stroke-width="4"/></g>
-      <g id="gloves" class="equipment off"><path d="M29 189 Q23 172 35 171 Q42 174 44 185 Q45 161 55 167 L63 181 Q69 195 58 210 Q43 215 32 203Z" fill="#ffdb45" stroke="#d9a319" stroke-width="4"/><path d="M253 247 Q247 225 259 223 Q268 224 269 233 Q282 222 287 234 Q290 252 275 264 L261 265Z" fill="#ffdb45" stroke="#d9a319" stroke-width="4"/></g>
-      <g id="glasses" class="equipment off"><path d="M91 122 L108 118 H137 Q147 118 147 133 L147 143 Q142 154 119 154 Q94 154 91 140Z" fill="#5fc8ff" fill-opacity=".35" stroke="#1756c5" stroke-width="7"/><path d="M161 122 L177 118 H202 Q214 118 215 133 L214 140 Q210 154 187 154 Q161 154 160 142Z" fill="#5fc8ff" fill-opacity=".35" stroke="#1756c5" stroke-width="7"/><path d="M146 133 Q154 126 162 133 M89 127 L73 123 M214 127 L231 123" stroke="#1756c5" stroke-width="6" stroke-linecap="round" fill="none"/></g>
-    </svg>
-    <div id="sparkle" class="sparkle hide">✦ 삐싱! ✦</div>
-    <div id="equipLabel" class="equipment-label">안전모 준비!</div>
-  </div>
-  <div class="play-bottom"><div class="timing-top"><span>위험을 멈춰라!</span><span id="hint">초록 구간을 노리세요</span></div>
-   <div id="lane" class="lane"><div class="zone bad zone1"></div><div class="zone caution zone2"></div><div class="zone good zone3"></div><div class="zone caution zone4"></div><div class="zone bad zone5"></div><div class="center-guide"></div><i id="leftNeedle" class="needle blue"></i><i id="rightNeedle" class="needle cyan"></i></div>
-   <div class="lane-label"><span>LEFT</span><b>SAFE ZONE</b><span>RIGHT</span></div>
-   <button id="tap" class="bigbtn tapbtn" disabled>준비 중...</button><div id="reaction" class="reaction">경고를 확인하고 타이밍을 맞춰주세요!</div>
-  </div>
- </section>
- <section class="scene result hide" id="result"><div class="top-logo"><span class="lsmark">LS</span><span>전선</span></div><div class="result-core"><div class="result-icon">🏆</div><div class="pill">MISSION COMPLETE</div><h1>5단계 안전 미션 완료!</h1><div class="final-number" id="final">0.000</div><p class="finish-message">모두의 안전을 지켜주셔 감사합니다</p><p class="save" id="saveStatus">최고 점수를 저장하는 중…</p><div class="result-buttons"><button class="bigbtn" id="retry">다시 도전</button><button class="ghostbtn" id="leaderboardBtn">전체 랭킹 보기</button></div></div></section>
- <section class="scene board hide" id="board"><div class="board-head"><button class="backbtn" id="boardBack">← 뒤로</button><div class="tiny-logo"><span>LS</span>전선</div><button class="backbtn" id="refresh">새로고침</button></div><h1>🏆 TOP 10</h1><p class="board-sub">5라운드 합산 점수 · 최고 기록 기준</p><div class="rank-list" id="rankList"></div><p class="network" id="rankStatus"></p></section>
-</div>
-<script src="./firebase-config.js"></script><script type="module" src="./script.js"></script>
-</body></html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+<meta name="theme-color" content="#0b408e" />
+<title>안전 타이밍 챌린지 | LS전선</title>
+<style>
+:root{font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:#153252;background:#eaf0f7;font-synthesis:none}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{overscroll-behavior:none}button,input{font:inherit}button{cursor:pointer;touch-action:manipulation}#app{width:100%;height:100%;height:100dvh;min-height:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 16%,#e4f1ff,#d7e6fb 70%,#c7d9f1)}
+.screen{width:min(100%,580px);height:100%;min-height:0;display:flex;flex-direction:column;position:relative;overflow:hidden;background:linear-gradient(160deg,#f9fcff 0%,#e9f3ff 68%,#deedff 100%)}.hide{display:none!important}.brand{display:block;width:clamp(120px,38vw,185px);height:auto;object-fit:contain;mix-blend-mode:multiply}.head{padding:calc(12px + env(safe-area-inset-top,0px)) 20px 8px;display:flex;align-items:center;justify-content:space-between;gap:10px}.head .brand{width:clamp(105px,29vw,155px)}.capsule{font-weight:800;font-size:11px;letter-spacing:1.1px;border:1px solid #acc6ed;border-radius:30px;color:#1553a7;padding:8px 10px;white-space:nowrap;background:white}
+h1,h2,p{margin:0}.intro{text-align:center}.intro .head{justify-content:center;padding-top:calc(25px + env(safe-area-inset-top,0px))}.intro-main{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(9px,2vh,18px);padding:0 24px 12px}.intro h1{font-size:clamp(29px,7vw,42px);line-height:1.23;letter-spacing:-1.4px;color:#0b397e}.accent{color:#f26f2d}.intro-desc{font-size:clamp(13px,3.4vw,16px);line-height:1.6;color:#507197}.pose-intro{height:min(29vh,230px);min-height:100px;max-width:50%;width:auto;object-fit:contain;border-radius:14px;mix-blend-mode:multiply}.entry{width:min(100%,365px);display:flex;flex-direction:column;gap:9px;text-align:left}.entry label{font-size:14px;font-weight:800}.entry input{border:2px solid #c3d6ef;border-radius:15px;background:white;width:100%;padding:13px 16px;font-size:17px;outline:none}.entry input:focus{border-color:#1764d5}.primary{border:0;border-radius:17px;background:#1158c0;color:white;padding:15px 12px;font-weight:900;box-shadow:0 6px 0 #0b3e85;font-size:18px}.primary:active{transform:translateY(3px);box-shadow:0 3px 0 #0b3e85}.subtle{background:white;border:1px solid #b6d0ef;border-radius:14px;padding:12px 10px;color:#1555a5;font-weight:800}.status{color:#597899;font-size:12px;text-align:center;min-height:16px}.foot{font-size:11px;color:#6b83a1;padding:0 14px calc(12px + env(safe-area-inset-bottom,0px));text-align:center}
+.game{touch-action:manipulation}.game-head{padding:calc(10px + env(safe-area-inset-top,0px)) 16px 8px;display:flex;align-items:center;justify-content:space-between;gap:10px}.game-head .brand{width:clamp(90px,25vw,132px)}.stat{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800}.total{color:#1756aa;background:white;padding:8px 10px;border-radius:12px;border:1px solid #c2d8f6;font-size:15px;min-width:99px;text-align:right}.progress{display:flex;gap:5px;padding:0 16px}.progress i{height:5px;background:#c4d7f1;border-radius:20px;flex:1}.progress i.done{background:#19a96d}.progress i.active{background:#f9a43c}.alert{margin:8px 16px 0;background:#fff5e5;border:1px solid #ffd2a1;border-radius:15px;display:flex;align-items:center;justify-content:center;min-height:66px;gap:10px;padding:8px;color:#a34f11}.siren{font-size:25px;animation:pulse .65s infinite alternate}@keyframes pulse{to{transform:scale(1.2);opacity:.5}}.alert h2{font-size:clamp(17px,4vw,23px);line-height:1.15}.alert p{font-size:12px;margin-top:4px;color:#966546}.character-space{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;position:relative;padding:5px 12px}.character-space:before{content:"";width:min(70vw,320px);height:min(70vw,320px);border-radius:50%;background:radial-gradient(circle,#ffffff,#d5e9ff 67%,transparent 70%);position:absolute;opacity:.9}.figure{position:relative;height:100%;max-height:100%;max-width:100%;width:auto;object-fit:contain;mix-blend-mode:multiply;filter:drop-shadow(0 6px 8px rgba(39,72,121,.12))}.sparkle{z-index:3;position:absolute;top:15%;left:50%;transform:translateX(-50%) rotate(-7deg);font-size:34px;font-weight:1000;color:#ff8d1f;text-shadow:1px 2px white,0 0 13px #ffdc69;white-space:nowrap;animation:pop .55s ease-out}@keyframes pop{from{opacity:0;transform:translateX(-50%) scale(.3)}to{opacity:1;transform:translateX(-50%) scale(1)}}.equip-status{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);padding:7px 12px;border-radius:22px;white-space:nowrap;font-size:12px;font-weight:900;background:#0a5abb;color:white;z-index:2}.play-bottom{padding:12px 16px calc(14px + env(safe-area-inset-bottom,0px));background:linear-gradient(180deg,#ffffffed,#f9fbff);border-top:1px solid #c9ddf5}.timing-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px;font-size:13px;font-weight:900;color:#194e90}.lane{height:62px;position:relative;border-radius:13px;overflow:hidden;border:2px solid #203c68;background:linear-gradient(90deg,#f74f57 0 24%,#ffca53 24% 41%,#31c97e 41% 59%,#ffca53 59% 76%,#f74f57 76% 100%)}.center{position:absolute;left:50%;top:0;bottom:0;width:2px;background:#fff;opacity:.88;transform:translateX(-50%)}.needle{height:calc(100% - 8px);width:4px;position:absolute;top:4px;background:#fff;border-radius:3px;box-shadow:0 0 0 2px #163975,0 0 9px #1f3d70;transform:translateX(-50%);will-change:left}.lane-label{display:flex;justify-content:space-between;color:#4d6b91;font-size:10px;font-weight:800;letter-spacing:.7px;margin:6px 2px 8px}.tap{width:100%;padding:14px;border:0;border-radius:16px;background:#ffd246;color:#6e3e00;font-size:19px;font-weight:1000;box-shadow:0 5px 0 #d9a22f}.tap:active{transform:translateY(3px);box-shadow:0 2px 0 #d9a22f}.tap:disabled{opacity:.57;box-shadow:none}.feedback{min-height:20px;text-align:center;color:#1756a3;font-size:13px;font-weight:900;margin-top:10px}
+.result{align-items:center;text-align:center}.result .head{width:100%;justify-content:center}.result-main{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:clamp(9px,2vh,17px);padding:12px 24px}.result-figure{height:min(31vh,230px);width:auto;max-width:65%;object-fit:contain;border-radius:14px;mix-blend-mode:multiply}.medal{font-size:29px}.result h1{font-size:clamp(23px,6vw,34px);color:#0a3c87}.final{font-size:clamp(44px,11vw,68px);line-height:1.1;font-weight:1000;color:#0c55bd;letter-spacing:-2px}.thankyou{font-size:clamp(15px,4vw,20px);font-weight:800}.actions{display:flex;flex-direction:column;gap:10px;width:min(100%,350px)}.actions button{min-height:47px}.result .status{font-size:12px}
+.board h1{text-align:center;font-size:25px;margin:12px 0}.board .head{padding-top:calc(16px + env(safe-area-inset-top,0px))}.board-list{overflow:auto;min-height:0;flex:1;padding:8px 14px 16px}.rank-row{display:flex;gap:10px;align-items:center;background:white;border:1px solid #d7e5f7;border-radius:13px;padding:12px;margin-bottom:8px}.position{background:#e4f1ff;color:#165bbb;border-radius:12px;width:36px;height:36px;display:grid;place-items:center;font-weight:1000}.rank-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:800}.rank-score{font-weight:1000;color:#155bbb}.board-note{padding:12px 16px calc(16px + env(safe-area-inset-bottom,0px));color:#607797;font-size:12px;text-align:center}
+@media (max-height:690px){.intro-main{gap:7px}.intro .head{padding-top:10px}.pose-intro{height:20vh}.alert{min-height:52px;margin-top:6px}.game-head{padding-top:7px}.play-bottom{padding-top:8px;padding-bottom:8px}.lane{height:46px}.tap{padding:11px}.character-space{padding:2px}.result-main{gap:7px}.result-figure{height:22vh}}
+@media (min-width:650px){.screen{max-height:920px;border-radius:25px;box-shadow:0 20px 80px #45608d40}}
+</style>
+</head>
+<body><main id="app">
+<section class="screen intro" id="intro">
+ <header class="head"><img class="brand" src="./assets/ls-cable-logo.png" alt="LS전선 공식 로고"></header>
+ <div class="intro-main">
+  <span class="capsule">SAFETY TIMING · 5 ROUNDS</span>
+  <h1>위험을 멈춰라!<br><span class="accent">안전 타이밍 챌린지</span></h1>
+  <img class="pose-intro" src="./assets/pose-0.png" alt="안전 캐릭터 기본 모습">
+  <p class="intro-desc">양쪽의 두 줄이 중앙 초록 구간에 올 때 터치!<br>다섯 번의 점수를 합산해 순위를 겨뤄요.</p>
+  <div class="entry"><label for="nickname">참가 닉네임</label><input id="nickname" maxlength="12" autocomplete="nickname" placeholder="예: 안전지킴이"><button class="primary" id="start">게임 시작 →</button><button class="subtle" id="introBoard">전체 랭킹 보기</button></div>
+  <p class="status" id="network">랭킹 연결 확인 중…</p>
+ </div><footer class="foot">익명 참여형 이벤트 · 브라우저별 최고 기록 저장</footer>
+</section>
+<section class="screen game hide" id="game">
+ <header class="game-head"><img class="brand" src="./assets/ls-cable-logo.png" alt="LS전선 공식 로고"><span class="stat" id="roundLabel">ROUND 1 / 5</span><div class="total" id="total">0.000</div></header>
+ <div class="progress" id="dots"></div>
+ <div class="alert"><span class="siren">⚠️</span><div><h2 id="hazard">낙하물 위험!</h2><p id="hazardDesc">안전모를 착용하세요</p></div></div>
+ <div class="character-space" id="characterSpace"><img id="figure" class="figure" src="./assets/pose-0.png" alt="안전 캐릭터"><span id="sparkle" class="sparkle hide">✦ 삐싱! ✦</span><span class="equip-status" id="equipStatus">안전모 준비!</span></div>
+ <div class="play-bottom"><div class="timing-title"><span>두 줄을 중앙에 맞추세요!</span><span id="speedText">LEVEL 1</span></div>
+ <div class="lane" id="lane"><span class="center"></span><i class="needle" id="needleL"></i><i class="needle" id="needleR"></i></div>
+ <div class="lane-label"><span>RED</span><span>YELLOW</span><span>PERFECT</span><span>YELLOW</span><span>RED</span></div>
+ <button class="tap" id="tap" disabled>준비 중…</button><div class="feedback" id="feedback">경고를 확인하세요!</div></div>
+</section>
+<section class="screen result hide" id="result">
+ <header class="head"><img class="brand" src="./assets/ls-cable-logo.png" alt="LS전선 공식 로고"></header>
+ <div class="result-main"><span class="medal">🏆</span><h1>5단계 안전 미션 완료!</h1><img class="result-figure" src="./assets/pose-5.png" alt="모든 보호구 착용을 완료한 캐릭터"><strong class="final" id="final">0.000</strong><p class="thankyou">모두의 안전을 지켜주셔 감사합니다</p><p class="status" id="saveStatus">랭킹 저장 중…</p><div class="actions"><button class="primary" id="retry">다시 도전</button><button class="subtle" id="showBoard">전체 랭킹 보기</button><button class="subtle" id="home">처음으로 돌아가기</button></div></div>
+</section>
+<section class="screen board hide" id="board">
+ <header class="head"><button class="subtle" id="back">← 뒤로</button><img class="brand" src="./assets/ls-cable-logo.png" alt="LS전선 공식 로고"><button class="subtle" id="refresh">새로고침</button></header>
+ <h1>🏆 전체 TOP 10</h1><p class="status" id="rankStatus">랭킹을 불러오는 중…</p><div class="board-list" id="rankList"></div><footer class="board-note">각 참가자의 5라운드 합산 최고 점수 기준</footer>
+</section>
+</main><script src="./firebase-config.js"></script><script type="module" src="./script.js"></script></body></html>
