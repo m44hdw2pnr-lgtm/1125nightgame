@@ -1,8 +1,6 @@
-// 기존 Firebase 프로젝트의 웹 앱 설정값을 아래에 입력하세요.
-// 이 파일이 비어 있으면 이 기기에만 저장되는 체험 모드가 실행됩니다.
 window.FIREBASE_CONFIG = {
-  apiKey: "",
-  authDomain: "",
-  projectId: "",
-  appId: ""
+  apiKey: "AIzaSyBfYj71TRaWgciNWJjy0iseyk9zeRjtIZ8",
+  authDomain: "nightgame-85c78.firebaseapp.com",
+  projectId: "nightgame-85c78",
+  appId: "1:793778593313:web:2ec563112362831db60d60"
 };
